@@ -1,0 +1,17 @@
+
+
+## Set service up:
+
+```bash
+python3 -m multi_agent.paymentagent.paymentagent_as_service
+```
+
+## Send a request to service:
+
+``` bash
+
+python3 -m multi_agent.paymentagent.client 4111111111111111 123 2030 1 USD 100 0
+python3 -m multi_agent.paymentagent.client 5500005555555559 123 2030 6 EUR 25 990000000
+python3 -m multi_agent.paymentagent.client 4111111111111111 123 2020 1 USD 50 0
+python3 -m multi_agent.paymentagent.client 4111111111111112 123 2030 1 USD 10 0
+```

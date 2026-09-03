@@ -1,0 +1,2 @@
+python3 -m microservice.productcatalog.productcatalogservice
+python3 -m microservice.productcatalog.client
