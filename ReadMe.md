@@ -3,7 +3,7 @@
 ## Microservice System Benchmark:
 
 
-- **[*Google Online Boutique Microservices (B1)](https://github.com/GoogleCloudPlatform/microservices-demo)** (ms_baseline/google_ms)
+- **[Google Online Boutique Microservices (B1)]**
   
    ![SDG](figures/google-benchmark.drawio.png)
 
@@ -16,7 +16,13 @@ All AI agents are implemented using Python, Langgraph framework, and communicati
 
 For each microservice in each benchmark, an equivalent AI agent is implemented with the same database technology, DDD entities, communication interface (e.g., RESTful APIs, gRPC or thrift) are used for agents, and only the static functionality and logic of services converted as dynamic reasoning. Hence, the AI agents are pluggable in the system, so each component in the benchmarks can deployed either as service or AI agent.
 
-- **Google Online Boutique Microservices** (original microservice code: microservice folder, AI agents implementation: multi_agent folder)
+
+- Original source code: https://github.com/GoogleCloudPlatform/microservices-demo
+  
+- Python-converted source code with gRPC and MongoDB integration: (microservice folder)
+
+  
+- AI agents implementation using Ollama and Langgraph: multi_agent folder)
 
 ----------------------------
 

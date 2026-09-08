@@ -1,0 +1,8 @@
+fastapi==0.115.0
+uvicorn==0.30.0
+motor==3.7.1
+pymongo==4.10.1
+pydantic==2.9.2
+requests==2.32.3
+grpcio==1.74.0
+grpcio-tools==1.74.0
