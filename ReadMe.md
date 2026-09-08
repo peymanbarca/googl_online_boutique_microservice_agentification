@@ -61,11 +61,11 @@ The ollama server should be installed first, then ready to be started (with infe
 ----------------------------
 
 
-# Deploy Architectures (Microservice or Hybrid with agents) and Run Experiments
+# Deploy Architectures Locally (Microservice or Hybrid with Agents) and Run Experiments
 
 There is a **deploy-local.sh** script in the deploy_orchestration folder, which receives the list of service (with ports) and agents to deploy each component as service or AI agent.  
 
-## Deployment of microservice baseline and gather metrics
+## Local deployment of microservice baseline and gather metrics
 
 
 ```bash
@@ -75,14 +75,16 @@ There is a **deploy-local.sh** script in the deploy_orchestration folder, which 
 
     # 2. Evaluate with workload and gather metrics
     cd .. && python3 -m microservice.exp_runner
-    
-    ./shutdown_local_full.sh
     # the full evaluation results will be gathered in microservice/results folder.
+
+    cd local_deploy_orchestration
+    ./shutdown_local_full.sh
+
 ```
 
 
 
-## Deployment of full agentic system (with specific model and temperature) and gather metrics
+## local deployment of full agentic system (with specific model and temperature) and gather metrics
 
 
 ```bash
@@ -98,13 +100,16 @@ There is a **deploy-local.sh** script in the deploy_orchestration folder, which 
     cd .. && python3 -m multi_agent.exp_runner
     
     # the full evaluation results will be gathered in multi_agent/results folder.
+
+    cd local_deploy_orchestration
+    ./shutdown_local_full.sh
 ```
 
 -----------------------------
 
 
 
-## Deployment of hybrid agentic system and gather metrics
+## local deployment of hybrid agentic system and gather metrics
 
 
 ```bash
@@ -123,6 +128,9 @@ There is a **deploy-local.sh** script in the deploy_orchestration folder, which 
     cd .. && python3 -m multi_agent.exp_runner
     
     # the full evaluation results will be gathered in multi_agent/results folder.
+
+    cd local_deploy_orchestration
+    ./shutdown_local_full.sh    
 ```
 
 -----------------------------
