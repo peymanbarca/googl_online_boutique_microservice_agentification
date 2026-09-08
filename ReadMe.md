@@ -38,12 +38,10 @@ The ollama server should be installed first, then ready to be started (with infe
     systemctl start ollama
     ollama pull llama3.2:3b  # recommended
     ollama pull llama3:8b
-    ollama pull qwen3:14b
 
     # warm up (load the model in memory)
     ollama run llama3.2:3b "Explain CAP theorem in 3 sentences."
     ollama run llama3:8b "Explain CAP theorem in 3 sentences."
-    ollama run qwen3:14b "Explain CAP theorem in 3 sentences."
 ```
 
 ## Run local dockerized database and redis
@@ -69,18 +67,62 @@ There is a **deploy-local.sh** script in the deploy_orchestration folder, which 
 
 ## Deployment of microservice baseline and gather metrics
 
-1-  **Google Online Boutique Microservices**
 
 ```bash
-    cd local_deploy_orchestration/google_ms
+    cd local_deploy_orchestration
     
     ./deploy-local.sh services=ad_service:5057,cart_service:5054,checkout_service:5050,currency_service:5053,email_service:5056,payment_service:5052,product_catalog_service:5055,recommendation_service:5058,shipping_service:5051 agents=
 
     # 2. Evaluate with workload and gather metrics
-    python3 -m microservice.exp_runner
+    cd .. && python3 -m microservice.exp_runner
     
-    # the full evaluation results will be gathered in ms_baseline/google_ms/results folder.
+    ./shutdown_local_full.sh
+    # the full evaluation results will be gathered in microservice/results folder.
 ```
 
+
+
+## Deployment of full agentic system (with specific model and temperature) and gather metrics
+
+
+```bash
+    cd local_deploy_orchestration
+    
+    ./deploy-local.sh \
+    services= \
+    agents=ad_agent:5057,cart_agent:5054,checkout_agent:5050,currency_agent:5053,email_agent:5056,payment_agent:5052,product_catalog_agent:5055,recommendation_agent:5058,shipping_agent:5051 \
+    model=llama3.2:3b \
+    temperature=0.2
+
+    # 2. Evaluate with workload and gather metrics
+    cd .. && python3 -m multi_agent.exp_runner
+    
+    # the full evaluation results will be gathered in multi_agent/results folder.
+```
+
+-----------------------------
+
+
+
+## Deployment of hybrid agentic system and gather metrics
+
+
+```bash
+    cd local_deploy_orchestration
+    
+
+    ## Orchestrator service + All Specialized agents
+    ./deploy-local.sh \
+    services=checkout_service:5050 \
+    agents=ad_agent:5057,cart_agent:5054,currency_agent:5053,email_agent:5056,payment_agent:5052,product_catalog_agent:5055,recommendation_agent:5058,shipping_agent:5051
+
+
+    # or deploy any custom combination of services and agents
+
+    # 2. Evaluate with workload and gather metrics
+    cd .. && python3 -m multi_agent.exp_runner
+    
+    # the full evaluation results will be gathered in multi_agent/results folder.
+```
 
 -----------------------------

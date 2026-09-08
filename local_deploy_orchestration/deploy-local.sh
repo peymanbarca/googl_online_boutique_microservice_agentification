@@ -67,7 +67,7 @@ sleep 0.1
 
 echo "Starting services..."
 
-cd ../.. && rm -f *.log
+cd .. && rm -f *.log
 
 for pair in "${SVC_LIST[@]}"; do
   NAME="${pair%%:*}"
@@ -76,23 +76,23 @@ for pair in "${SVC_LIST[@]}"; do
 
   echo "Running service: $NAME on port $PORT, Swagger UI: http://localhost:$PORT_REST/docs"
   if [ "$NAME" == "ad_service" ]; then
-     nohup python3 -m ms_baseline.google_ms.adservice.adservice >& ad_service.log &
+     nohup python3 -m microservice.adservice.adservice >& ad_service.log &
   elif [ "$NAME" == "cart_service" ]; then
-     nohup python3 -m ms_baseline.google_ms.cartservice.cartservice >& cart_service.log &
+     nohup python3 -m microservice.cartservice.cartservice >& cart_service.log &
   elif [ "$NAME" == "product_catalog_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.productcatalog.productcatalogservice >& productcatalog_service.log &
+     nohup python3 -m microservice.productcatalog.productcatalogservice >& productcatalog_service.log &
   elif [ "$NAME" == "recommendation_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.recommendationservice.recommendationservice >& recommendationservice.log &
+     nohup python3 -m microservice.recommendationservice.recommendationservice >& recommendationservice.log &
   elif [ "$NAME" == "shipping_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.shippingservice.shippingservice >& shippingservice.log &
+     nohup python3 -m microservice.shippingservice.shippingservice >& shippingservice.log &
   elif [ "$NAME" == "payment_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.paymentservice.paymentservice >& payment_service.log &
+     nohup python3 -m microservice.paymentservice.paymentservice >& payment_service.log &
   elif [ "$NAME" == "currency_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.currencyservice.currencyservice >& currency_service.log &
+     nohup python3 -m microservice.currencyservice.currencyservice >& currency_service.log &
   elif [ "$NAME" == "email_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.emailservice.emailservice >& email_service.log &
+     nohup python3 -m microservice.emailservice.emailservice >& email_service.log &
   elif [ "$NAME" == "checkout_service" ]; then  
-     nohup python3 -m ms_baseline.google_ms.checkoutservice.checkoutservice >& checkoutservice.log &
+     nohup python3 -m microservice.checkoutservice.checkoutservice >& checkoutservice.log &
   else
      echo "Unknown service: $NAME"
   fi
@@ -110,23 +110,23 @@ for pair in "${AGENT_LIST[@]}"; do
 
   echo "Running agent: $NAME on port $PORT, Swagger UI: http://localhost:$PORT_REST/docs"
   if [ "$NAME" == "ad_agent" ]; then
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.adagent.adagent_as_service >& ad_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.adagent.adagent_as_service >& ad_agent.log &
   elif [ "$NAME" == "cart_agent" ]; then
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.cartagent.cartagent_as_service >& cart_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.cartagent.cartagent_as_service >& cart_agent.log &
   elif [ "$NAME" == "product_catalog_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.productcatalogagent.productcatalogagent_as_service >& product_search_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.productcatalogagent.productcatalogagent_as_service >& product_search_agent.log &
   elif [ "$NAME" == "recommendation_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.recommendationagent.recommendationagent_as_service >& recommendationagent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.recommendationagent.recommendationagent_as_service >& recommendationagent.log &
   elif [ "$NAME" == "shipping_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.shippingagent.shippingagent_as_service >& shipment_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.shippingagent.shippingagent_as_service >& shipment_agent.log &
   elif [ "$NAME" == "payment_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.paymentagent.paymentagent_as_service >& payment_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.paymentagent.paymentagent_as_service >& payment_agent.log &
   elif [ "$NAME" == "currency_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.currencyagent.currencyagent_as_service  >& currency_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.currencyagent.currencyagent_as_service  >& currency_agent.log &
   elif [ "$NAME" == "email_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.emailagent.emailagent_as_service  >& email_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.emailagent.emailagent_as_service  >& email_agent.log &
   elif [ "$NAME" == "checkout_agent" ]; then  
-     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m refactored_architecture.google_ms.checkoutagent.checkoutagent_as_service >& checkout_agent.log &
+     MODEL="$MODEL" TEMPERATURE="$TEMPERATURE" nohup python3 -m multi_agent.checkoutagent.checkoutagent_as_service >& checkout_agent.log &
   else
      echo "Unknown agent: $NAME"
   fi

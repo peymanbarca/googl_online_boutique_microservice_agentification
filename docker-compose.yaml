@@ -1,46 +1,33 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:15
-    container_name: postgres_ms_to_mas
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_DB: ms_to_mas
-      POSTGRES_PASSWORD: pass1
-    volumes:
-      - postgres-local-db-ms-to-mas:/var/lib/postgresql/data
-      - ./init:/docker-entrypoint-initdb.d
-    ports:
-      - "5442:5432"
-    command: >
-      bash -c "apt-get update && apt-get install -y postgresql-16-pgvector && docker-entrypoint.sh postgres"
+
 
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb_ms_to_mas
+    container_name: mongodb_ms_to_mas_google
     ports:
       - "27017:27017"
     # environment:
     #   - MONGO_INITDB_ROOT_USERNAME=user
     #   - MONGO_INITDB_ROOT_PASSWORD=pass1
     volumes:
-      - mongodb-data-ms-to-mas:/data/db
+      - mongodb-data-ms-to-mas-google:/data/db
 
 
   redis:
     image: redis
-    container_name: redis_ms_to_mas
+    container_name: redis_ms_to_mas_google
     #restart: always
     ports:
       - '6385:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass 1
     volumes:
-      - redis-cache-local-ms-to-mas:/data
+      - redis-cache-local-ms-to-mas-google:/data
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq_ms_to_mas
+    container_name: rabbitmq_ms_to_mas_google
     ports:
       - "5672:5672"  # RabbitMQ broker port
       - "15672:15672"  # RabbitMQ management UI port
@@ -48,7 +35,7 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
     volumes:
-      - rabbitmq-data-ms-to-mas:/var/lib/rabbitmq
+      - rabbitmq-data-ms-to-mas-google:/var/lib/rabbitmq
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
       interval: 30s
@@ -59,7 +46,6 @@ services:
 
 
 volumes:
-  redis-cache-local-ms-to-mas:
-  postgres-local-db-ms-to-mas:
-  rabbitmq-data-ms-to-mas:
-  mongodb-data-ms-to-mas:
+  redis-cache-local-ms-to-mas-google:
+  rabbitmq-data-ms-to-mas-google:
+  mongodb-data-ms-to-mas-google:

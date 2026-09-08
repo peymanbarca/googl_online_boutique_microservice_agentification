@@ -19,9 +19,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape, TemplateErr
 from pydantic import BaseModel
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
-from ms_baseline.google_ms.shared import demo_pb2
-from ms_baseline.google_ms.shared import demo_pb2_grpc
-from ms_baseline.google_ms.shared.base_service import make_health_app, run_service
+from microservice.shared import demo_pb2
+from microservice.shared import demo_pb2_grpc
+from microservice.shared.base_service import make_health_app, run_service
 
 logger = logging.getLogger(__name__)
 GRPC_PORT = int(os.getenv("PORT", "5056"))

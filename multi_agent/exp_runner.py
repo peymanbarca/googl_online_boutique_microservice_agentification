@@ -998,7 +998,7 @@ if __name__ == "__main__":
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    parser.add_argument("--trials",        type=int,   default=10,
+    parser.add_argument("--trials",        type=int,   default=100,
                         help="Total number of end-to-end trials (default: 1)")
     parser.add_argument("--concurrency",   type=int,   default=1,
                         help="Parallel worker threads (default: 1)")
