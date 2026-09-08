@@ -141,7 +141,9 @@ async def main():
     print()
 
     # Initialize client
-    client = CartServiceClient("localhost:5054")
+    target = "cart-service.yellowocean-608034e9.canadacentral.azurecontainerapps.io:5054"
+    #target = "localhost:5054"  # Use this for local testing
+    client = CartServiceClient(target)
 
     try:
         # Connect to service
