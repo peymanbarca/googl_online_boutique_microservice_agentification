@@ -31,6 +31,8 @@
 
 ## Deploy using azure portal
     go to container app -> create -> use the image created
+    
+    enable ingress with accept traffic from anywhere, type=http, transport=http2
 
 ## Deploy using CLI
 
@@ -41,7 +43,7 @@
       --image grpcacr123.azurecr.io/cart-service:latest \
       --target-port 5054 \
       --ingress external \
-      --transport http \
+      --transport http2 \
       --registry-server grpcacr123.azurecr.io \
       --registry-username grpcacr123 \
       --registry-password x \
